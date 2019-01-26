@@ -2,7 +2,7 @@ public class sortowanie_babelkowe
 {
     public static void main(String[] Args)
     {
-        int[] tab = {6, 4, 8, 2, 5, 1, 10, 3, 9, 7};
+        int[] tab = {6, 4, 8, 2, 5, 1, 10,};
         int i, j, temp,f;
         System.out.println("Zawartosc tablicy: ");
          
