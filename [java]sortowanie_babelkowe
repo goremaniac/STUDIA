@@ -1,9 +1,23 @@
-public class sortowanie_babelkowe
-{
-    public static void main(String[] Args)
-    {
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package bulbulator;
+
+/**
+ *
+ * @author prybak
+ */
+public class main1 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
         int[] tab = {6, 4, 8, 2, 5, 1, 10,};
-        int i, j, temp,f;
+        int i, j, temp;
         System.out.println("Zawartosc tablicy: ");
          
         for(i = 0; i < tab.length; i++) System.out.print(tab[i] + " ");
@@ -21,6 +35,51 @@ public class sortowanie_babelkowe
         System.out.println();
         System.out.println("Posortowana tablica: ");        
         for(i = 0; i < tab.length; i++) System.out.print(tab[i] + " ");
-         
     }
+    
+}
+
+
+
+/**
+* Sortowanie liczb calkowitych metoda babelkowa
+* Program zostal pobrany ze strony www.algorytm.org
+*/
+ 
+import java.util.Scanner;
+ 
+public class bubble {
+ 
+private static void b_sort(int tab[]){
+int temp;
+int zmiana = 1;
+while(zmiana > 0){
+zmiana = 0;
+for(int i=0; i<tab.length-1; i++){
+if(tab[i]>tab[i+1]){
+temp = tab[i+1];
+tab[i+1] = tab[i];
+tab[i] = temp;
+zmiana++;
+}
+}
+}
+for(int i=0; i<tab.length; i++){
+System.out.print(tab[i]+" ");
+}
+}
+ 
+public static void main(String[] args) {
+int ilosc;
+Scanner in = new Scanner(System.in);
+System.out.println("Podaj ilość elementów tablicy");
+ilosc = in.nextInt();
+ 
+int[] tab = new int[ilosc];
+for(int i=0; i<tab.length; i++){
+System.out.println("Podaj element tablicy:");
+tab[i] = in.nextInt();
+}
+b_sort(tab);
+}
 }
