@@ -1,0 +1,117 @@
+import random
+
+ileliczb = 3
+maksliczba = 3
+ilosclosowan = 0
+liczby = []
+liczba = []
+typ = []
+typy = []
+alist = []
+sorted_podane_numery = []
+sorted_wylosowane_numery = []
+
+
+#podajemy liczby - to jest na razie zjebane i nie przyjmuje wartosci nananana
+def podanieliczb():
+    for i in range(1):
+        print("Wytypuj %s z %s liczb: " % (ileliczb, maksliczba))
+        typy = set()
+        i = 0
+        while i < ileliczb:
+            try:
+                typ = int(input("Podaj liczbę %s: " % (i + 1)))
+            except ValueError:
+                print("Błędne dane!")
+                continue
+            if 0 < typ <= maksliczba and typ not in typy:
+                typy.add(typ)
+                i = i + 1
+
+
+#losujemy liczby - losowanie
+def losowanie ():
+    i = 0
+    while i < ileliczb:
+         liczba = random.randint(1, maksliczba)
+         if liczby.count(liczba) == 0:
+            liczby.append(liczba)
+            i = i + 1
+
+
+
+#porownujemy wyniki posortowanych zbiorow
+def porownanie():
+    if sorted_wylosowane_numery == sorted_podane_numery:
+        print("Wylosowane liczby:", sorted_wylosowane_numery)
+        print("Podane liczby:", sorted_podane_numery)
+        print("Trafione!")
+        exit()
+    else:
+        print("Wylosowane liczby:", sorted_wylosowane_numery)
+        print("Podane liczby:", sorted_podane_numery)
+        print("Nietrafione losowanie!")
+        #tu sie doda jeszcze licznik losowan nieudanych
+
+
+
+
+#quicksort modules BEGIN
+
+def quickSort(alist):
+   quickSortHelper(alist,0,len(alist)-1)
+
+def quickSortHelper(alist,first,last):
+   if first<last:
+
+       splitpoint = partition(alist,first,last)
+
+       quickSortHelper(alist,first,splitpoint-1)
+       quickSortHelper(alist,splitpoint+1,last)
+
+
+def partition(alist,first,last):
+   pivotvalue = alist[first]
+
+   leftmark = first+1
+   rightmark = last
+
+   done = False
+   while not done:
+
+       while leftmark <= rightmark and alist[leftmark] <= pivotvalue:
+           leftmark = leftmark + 1
+
+       while alist[rightmark] >= pivotvalue and rightmark >= leftmark:
+           rightmark = rightmark -1
+
+       if rightmark < leftmark:
+           done = True
+       else:
+           temp = alist[leftmark]
+           alist[leftmark] = alist[rightmark]
+           alist[rightmark] = temp
+
+   temp = alist[first]
+   alist[first] = alist[rightmark]
+   alist[rightmark] = temp
+
+
+   return rightmark
+
+#quicksort modules END
+
+
+
+podanieliczb ()
+alist = typy
+quickSort(alist)
+sorted_podane_numery = alist
+
+losowanie()
+alist = liczby
+quickSort(alist)
+sorted_wylosowane_numery = alist
+
+porownanie()
+
