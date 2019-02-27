@@ -14,20 +14,16 @@ sorted_wylosowane_numery = []
 
 #podajemy liczby - to jest na razie zjebane i nie przyjmuje wartosci nananana
 def podanieliczb():
-    for i in range(1):
-        print("Wytypuj %s z %s liczb: " % (ileliczb, maksliczba))
-        typy = set()
-        i = 0
-        while i < ileliczb:
-            try:
-                typ = int(input("Podaj liczbę %s: " % (i + 1)))
-            except ValueError:
-                print("Błędne dane!")
-                continue
-            if 0 < typ <= maksliczba and typ not in typy:
-                typy.add(typ)
-                i = i + 1
-
+    i = 0
+    while i <= ileliczb:
+        typ = eval(input("Podaj liczbe: "))
+            # except ValueError:
+            #     print("Błędne dane!")
+            # continue
+        if 0 < typ <= maksliczba and typ not in typy:
+            typy.append(typ)
+        i = i + 1  # update counter
+    print("Twoja liczba to: ", typy)
 
 #losujemy liczby - losowanie
 def losowanie ():
@@ -37,7 +33,6 @@ def losowanie ():
          if liczby.count(liczba) == 0:
             liczby.append(liczba)
             i = i + 1
-
 
 
 #porownujemy wyniki posortowanych zbiorow
