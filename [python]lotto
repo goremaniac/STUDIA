@@ -1,54 +1,96 @@
 import random
 
-ileliczb = 3
-maksliczba = 3
-ilosclosowan = 0
-liczby = []
-liczba = []
-typ = []
-typy = []
-alist = []
-sorted_podane_numery = []
-sorted_wylosowane_numery = []
+#KONCEPT - losowanie lotto - gracz podaje 6 liczb z 49 i program ma losowac az nie uda sie trafic.
+
+#funkcja podawania - przenosi liste do nastepnej funkcji..
+#funkcja losowania - bierze podane liczby plus ma swoje - przenosi losowane liczby i podane dalej...
+#funkcja wyswietlania - wyswietla podane i wylosowane liczby
 
 
-#podajemy liczby - to jest na razie zjebane i nie przyjmuje wartosci nananana
+
+#Podanie liczb przez gracza
 def podanieliczb():
+    ileliczb = 5
+    maksliczba = 49
+    typy_gracza = []
     i = 0
+    print("Podaj 6 liczb z 49 do losowania Lotto!")
     while i <= ileliczb:
         typ = eval(input("Podaj liczbe: "))
-            # except ValueError:
-            #     print("Błędne dane!")
-            # continue
-        if 0 < typ <= maksliczba and typ not in typy:
-            typy.append(typ)
-        i = i + 1  # update counter
-    print("Twoja liczba to: ", typy)
+        if 0 < typ <= maksliczba and typ not in typy_gracza:
+            typy_gracza.append(typ)
+            i = i + 1  # update counter
+    print("func_podanieliczb DEBUG: Twoja typy to: ", typy_gracza)
+    losowanie(typy_gracza)
+    #odpalamy funkcje losowania i przenosimy sobie tablice z liczbami wytypowanymi przez gracza dalej...
+
 
 #losujemy liczby - losowanie
-def losowanie ():
+def losowanie (typy_gracza):
+    ileliczb = 5
+    maksliczba = 49
+    wyniki_losowania = []
     i = 0
     while i < ileliczb:
          liczba = random.randint(1, maksliczba)
-         if liczby.count(liczba) == 0:
-            liczby.append(liczba)
+         if wyniki_losowania.count(liczba) == 0:
+            wyniki_losowania.append(liczba)
             i = i + 1
+    print("func_losowanie DEBUG: Twoja typy to: ", typy_gracza)
+    print("func_losowanie DEBUG: Wyniki losowania to: ", wyniki_losowania)
+    #odpalamy sobie sortowanie tablic ...
+    sortowanie(wyniki_losowania,typy_gracza)
 
 
-#porownujemy wyniki posortowanych zbiorow
-def porownanie():
-    if sorted_wylosowane_numery == sorted_podane_numery:
-        print("Wylosowane liczby:", sorted_wylosowane_numery)
-        print("Podane liczby:", sorted_podane_numery)
-        print("Trafione!")
-        exit()
-    else:
-        print("Wylosowane liczby:", sorted_wylosowane_numery)
-        print("Podane liczby:", sorted_podane_numery)
+
+#sortowanie
+def sortowanie(wyniki_losowania,typy_gracza):
+    sorted_wyniki_losowania = []
+    sorted_typy_gracza = []
+    alist = wyniki_losowania
+    quickSort(alist)
+    sorted_wyniki_losowania = alist
+    alist = typy_gracza
+    quickSort(alist)
+    sorted_typy_gracza = alist
+    print("func_sortowanie DEBUG: Wyniki losowania SORTED to: ", sorted_wyniki_losowania)
+    print("func_sortowanie DEBUG: Typy gracza SORTED to: ", sorted_typy_gracza)
+    porownanie_wynikow(sorted_wyniki_losowania,sorted_typy_gracza)
+
+#porownujemy wyniki
+def porownanie_wynikow(sorted_wyniki_losowanie,sorted_typy_gracza):
+    print("Porownajmy wyniki losania!")
+    ilosclosowan = 0
+    if sorted_wyniki_losowanie != sorted_typy_gracza:
+        print("Wylosowane liczby:", sorted_wyniki_losowanie)
+        print("Podane liczby:", sorted_typy_gracza)
         print("Nietrafione losowanie!")
         #tu sie doda jeszcze licznik losowan nieudanych
+        ilosclosowan=ilosclosowan+1
+        print("Ilosc losowan wykonanych (jedno losowanie na dzien):", ilosclosowan)
+        nowe_losowanie(sorted_typy_gracza)
+
+    else:
+        print("Wylosowane liczby:", sorted_wyniki_losowanie)
+        print("Podane liczby:", sorted_typy_gracza)
+        print("Trafione!")
+        exit()
 
 
+def nowe_losowanie (sorted_typy_gracza):
+    print("Podane liczby:", sorted_typy_gracza)
+    print("NOWE LOSOWANIE!")
+    typy_gracza=sorted_typy_gracza
+    print("func_nowelosowanie DEBUG: Typy gracza to: ", typy_gracza)
+    #losowanie(typy_gracza)
+
+
+def wyniki_debug(typy_gracza,wyniki_losowania):
+    print("Wylosowane liczby:", typy_gracza)
+    print("Podane liczby:", wyniki_losowanie)
+
+def podanie_debug(typy_gracza):
+    print("Wylosowane liczby:", typy_gracza)
 
 
 #quicksort modules BEGIN
@@ -98,15 +140,8 @@ def partition(alist,first,last):
 
 
 
-podanieliczb ()
-alist = typy
-quickSort(alist)
-sorted_podane_numery = alist
 
-losowanie()
-alist = liczby
-quickSort(alist)
-sorted_wylosowane_numery = alist
-
-porownanie()
-
+#Main - i tyle ;p
+def main ():
+    podanieliczb()
+main()
